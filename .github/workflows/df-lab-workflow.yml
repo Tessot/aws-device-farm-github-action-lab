@@ -1,0 +1,38 @@
+name: AWS Device Farm Automated Test for Mobile App
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: arn:aws:iam::336339500189:role/GitHubActionCredentials-Role-VK3YS1QIUEJF
+          aws-region: us-west-2
+
+      - name: Schedule Device Farm Automated Test
+        id: RunTest
+        uses: aws-actions/aws-devicefarm-automated-test@v0.1
+        with:
+          run-name: GitHubAction-${{ github.workflow }}_${{ github.run_id }}_${{ github.run_attempt }}
+          run-settings-path: run-settings.json
+          artifact-types: ALL
+          upload-poll-interval: 1000
+          run-poll-interval: 30000
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: AutomatedTestOutputFiles
+          path: ${{ steps.RunTest.outputs.artifact-folder }}
