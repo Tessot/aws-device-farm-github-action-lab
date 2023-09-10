@@ -1,0 +1,36 @@
+{
+  "projectArn": "GitHubActionAutomatedTestRuns",
+  "appArn": "aws-devicefarm-sample-app.apk",
+  "devicePoolArn": "Top Devices",
+  "test": {
+    "type": "APPIUM_NODE",
+    "testPackageArn": "MySampleAndroidTests.zip",
+    "testSpecArn": "webdriverio_spec_file.yml"
+  },
+  "configuration": {
+    "locale": "en_US",
+    "location": {
+      "latitude": 47.6204,
+      "longitude": -122.3491
+    },
+    "customerArtifactPaths": {
+      "deviceHostPaths": [
+        "$WORKING_DIRECTORY"
+      ]
+    },
+    "radios": {
+      "wifi": true,
+      "bluetooth": false,
+      "nfc": true,
+      "gps": true
+    },
+    "billingMethod": "METERED"
+  },
+  "executionConfiguration": {
+    "jobTimeoutMinutes": 150,
+    "accountsCleanup": true,
+    "appPackagesCleanup": true,
+    "videoCapture": true,
+    "skipAppResign": false
+  }
+}
