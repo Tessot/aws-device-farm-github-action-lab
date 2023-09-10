@@ -1,5 +1,5 @@
 {
-  "projectArn": "GitHubActionAutomatedTestRuns",
+  "projectArn": "Device Farm Workshop",
   "appArn": "aws-devicefarm-sample-app.apk",
   "devicePoolArn": "Top Devices",
   "test": {
